@@ -5,6 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>taligumbaaa calculatorrr</title>
   <style>
+    
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #root {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      width: 320px;
+      padding: 20px 24px 28px;
+      user-select: none;
+    }
+
+    .display {
+      background: #222;
+      color: #fff;
+      font-size: 2.4rem;
+      text-align: right;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+      min-height: 56px;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 14px;
+    }
+
+    button {
+      background: #f0f1f5;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.3rem;
+      color: #222;
+      padding: 18px 0;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.06);
+      transition: background-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:hover {
+      background-color: #e1e2e8;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+    }
+
+    button.operator {
+      background: #4a90e2;
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgb(74 144 226 / 0.4);
+    }
+
+    button.operator:hover {
+      background: #357abd;
+      box-shadow: 0 6px 12px rgb(53 122 189 / 0.6);
+    }
+
+    button.zero {
+      grid-column: span 2;
+    }
 
   </style>
 </head>
