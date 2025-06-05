@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>taligumbaaa calculatorrr</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script>
+    const { useState } = React;
+
+    function Calculator() {
+      const [input, setInput] = useState("0");
+
+      
+      function appendValue(val) {
+        if (input === "0" && val !== ".") {
+          setInput(val);
+        } else if (val === "." && input.includes(".")) {
+          
+          return;
+        } else {
+          setInput(input + val);
+        }
+      }
+
+     
+      function appendOperator(op) {
+        
+        const lastChar = input[input.length - 1];
+        const operators = ["+", "-", "*", "/"];
+        if (operators.includes(lastChar)) {
+          
+          setInput(input.slice(0, -1) + op);
+        } else {
+          setInput(input + op);
+        }
+      }
+
+     
+      function clearAll() {
+        setInput("0");
+      }
+
+     
+      function backspace() {
+        if (input.length === 1) {
+          setInput("0");
+        } else {
+          setInput(input.slice(0, -1));
+        }
+      }
+
+    
+      function calculate() {
+        try {
+          
+          const lastChar = input[input.length - 1];
+          if (["+", "-", "*", "/"].includes(lastChar)) {
+            setInput(input.slice(0, -1));
+            return;
+          }
+         
+          let result = eval(input);
+          if (result === Infinity || result === -Infinity) {
+            result = "Error";
+          } else if (isNaN(result)) {
+            result = "Error";
+          }
+          setInput(String(result));
+        } catch {
+          setInput("Error");
+        }
+      }
+
+      return (
+        React.createElement("div", null,
+          React.createElement("div", { className: "display", ariaLabel: "Calculator display", role: "textbox", tabIndex: 0 }, input),
+          React.createElement("div", { className: "buttons" },
+            React.createElement("button", { onClick: clearAll, title: "Clear All" }, "AC"),
+            React.createElement("button", { onClick: backspace, title: "Backspace" }, "⌫"),
+            React.createElement("button", { onClick: () => appendOperator("/"), className: "operator", title: "Divide" }, "÷"),
+            React.createElement("button", { onClick: () => appendOperator("*"), className: "operator", title: "Multiply" }, "×"),
+
+            React.createElement("button", { onClick: () => appendValue("7") }, "7"),
+            React.createElement("button", { onClick: () => appendValue("8") }, "8"),
+            React.createElement("button", { onClick: () => appendValue("9") }, "9"),
+            React.createElement("button", { onClick: () => appendOperator("-"), className: "operator", title: "Subtract" }, "−"),
+
+            React.createElement("button", { onClick: () => appendValue("4") }, "4"),
+            React.createElement("button", { onClick: () => appendValue("5") }, "5"),
+            React.createElement("button", { onClick: () => appendValue("6") }, "6"),
+            React.createElement("button", { onClick: () => appendOperator("+"), className: "operator", title: "Add" }, "+"),
+
+            React.createElement("button", { onClick: () => appendValue("1") }, "1"),
+            React.createElement("button", { onClick: () => appendValue("2") }, "2"),
+            React.createElement("button", { onClick: () => appendValue("3") }, "3"),
+            React.createElement("button", { onClick: calculate, className: "operator", style: { gridRow: "span 2" }, title: "Equals" }, "="),
+
+            React.createElement("button", { onClick: () => appendValue("0"), className: "zero" }, "0"),
+            React.createElement("button", { onClick: () => appendValue(".") }, ".")
+          )
+        )
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      React.createElement(Calculator)
+    );
+  </script>
+</body>
+</html>
